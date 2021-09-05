@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} le {{ parent() }}{% endblock %}
+{% block h1 %}<h1>{% trans %}Welcome on the Blog{% endtrans %}</h1>{% endblock %}
+{% block content %}
+    <div class="content_blog">
+        {% block content_blog %}
+        {% endblock %}
+    </div>
+    <h2>{% trans %}A news Blog{% endtrans %}</h2>
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends 'blog.html.twig' %}
+{% block h1 %}<h1>{% trans %}List of Articles{% endtrans %}</h1>{% endblock %}
+{% block langues %}
+    <div class="langues">
+        <ul class="flex2">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('show_list', {'_locale' : 'fr' } ) }}">FR</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('show_list', {'_locale' : 'en' } )}}">EN</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content_blog %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div >
+        {% for article in articles %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">titre : {{ article.title|truncate }}</h5>
+                    <h6 class="card-title">id : {{ article.id }}</h6>
+                    {% for cates in article.categories %}
+                        <h6 class="card-title">catégorie : {{ cates.name }}</h6>
+                    {% else %}
+                        <h6>Pas de catégorie</h6>
+                    {% endfor %}
+                    <button type="button" class="btn btn-light"><a href="{{ path( 'show_article', {'id' : article.id} ) }}">{% trans %}View Article{% endtrans %}</a></button>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <button type="button" class="btn btn-light"><a href="{{ path( 'add_comment', {'id' : article.id} ) }}">{% trans %}Add a Comment{% endtrans %}</a></button>
+                    {% endif %}
+                </div>
+            </div>
+            <br />
+        {% endfor %}
+        {% for i in 1..total %}
+            {% if i != page %}
+                <a href="{{ path( 'show_list', {'page' : i} ) }}">{{ i }}</a>
+            {% elseif i == page %}
+                {{ i }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

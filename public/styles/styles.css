@@ -1,0 +1,45 @@
+h1 {
+    text-align: center;
+    color: pink;
+}
+a {
+    color: pink;
+}
+.flex{
+    margin-top: 50px;
+    display: flex;
+    width: 100%;
+}
+.card {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+h2{
+    text-align: center;
+}
+
+.content_blog{
+    text-align: center;
+    width: 65vw;
+    margin: 0 auto;
+}
+
+.content{
+    width: 65vw;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#article_send{
+    background-color: pink;
+    border: 1px solid pink;
+}
+
+.flex2{
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+}
+ul {
+    list-style: none;
+}

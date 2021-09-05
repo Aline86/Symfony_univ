@@ -1,0 +1,49 @@
+{% extends 'blog.html.twig' %}
+{% block title %} {{ parent() }}{% endblock %}
+
+{% block h1 %}<h1>{% trans %}View the Article{% endtrans %}</h1>{% endblock %}
+{% block langues %}
+    <div class="langues">
+        <ul class="flex2">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('show_article', {'id' : article.id , '_locale' : 'fr_FR' } ) }}">FR</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('show_article', { 'id' : article.id , '_locale' : 'en_EN' })}}">EN</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    <h2>Article</h2>
+    <div class="card" style="width: 65vw; margin: 0 auto;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ article.id }} {{ article.title }}</h5>
+            <p>contenu : {{ article.content }}</p>
+            <p>publié : {{ article.published }}</p>
+            <p>auteur : {{ article.author }}</p>
+            <p>nombre de vues : {{ article.nbviews }}</p>
+            <p>date de création : {{ article.createdAt|date('d-m-Y H:i:s') }}</p>
+            {% if is_granted('ROLE_ADMIN') %}
+                <button type="button" class="btn btn-light"><a href="{{ path( 'edit_article', {'id' : article.id} ) }}">{% trans %}Modify{% endtrans %}</a></button>
+                <button type="button" class="btn btn-light"><a href="{{ path( 'delete_article', {'id' : article.id} ) }}">{% trans %}Delete{%  endtrans %}</a></button>
+            {% endif %}
+        </div>
+    </div>
+    {% if comments != null %}
+        <h2>Commentaires</h2>
+    {%  endif %}
+    {% for comment in comments %}
+        <div class="card" style="width: 65vw; margin: 0 auto; margin-top: 50px;">
+            <div class="card-body">
+                <h5 class="card-title">titre : {{ comment.title }}</h5>
+                <h5 class="card-title">auteur : {{ comment.author }}</h5>
+                <h5 class="card-title">message : {{ comment.message }}</h5>
+                <h5 class="card-title">Création : {{ comment.createdAt|date('d-m-Y H:i:s') }}</h5>
+                <h6 class="card-title">id : {{ comment.id }}</h6>
+            </div>
+        </div>
+    {%  endfor %}
+    <br />
+{% endblock %}

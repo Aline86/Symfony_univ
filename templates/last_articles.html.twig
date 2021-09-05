@@ -1,0 +1,31 @@
+{% block menu_gauche %}
+    <div class="cards">
+        <h2>{% trans %}Category{% endtrans %}</h2>
+        {% for category in categories %}
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ category.id }} {{ category.name }}</h5>
+                <button type="button" class="btn btn-light"><a href="{{ path( 'show_articles_cate', {'id' : category.id} ) }}">{% trans %}View articles of the category{% endtrans %}</a></button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="cards">
+        <h2>{% trans %}5 last articles{% endtrans %}</h2>
+        {% for article in articles %}
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.id }} {{ article.title }}</h5>
+                    <p>contenu : {{ article.content }}</p>
+                    <p>publié : {{ article.published }}</p>
+                    <p>auteur : {{ article.author }}</p>
+                    <p>nombre de vues : {{ article.nbviews }}</p>
+                    <p>date de création : {{ article.createdAt|date('d-m-Y H:i:s') }}</p>
+                    <button type="button" class="btn btn-light"><a href="{{ path( 'show_article', {'id' : article.id, '_locale' : app.request.getLocale()}) }}">{% trans %}View Article{% endtrans %}</a></button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

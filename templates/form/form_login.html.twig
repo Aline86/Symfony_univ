@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block langues %}
+    <div class="langues">
+        <ul class="flex2">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login', {'_locale' : 'fr' } ) }}">FR</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login', {'_locale' : 'en' })}}">EN</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <form action="{{ path('app_login_check') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.username'|trans }}" />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password" placeholder="{{ 'security.password'|trans }}" />
+        {#
+        If you want to control the URL the user
+        is redirected to on success (more details below)
+        <input type="hidden" name="_target_path" value="/account" />
+        #}
+        <button type="submit">{{ 'security.validate'|trans }}</button>
+    </form>
+{% endblock %}

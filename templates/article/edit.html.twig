@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %} le {{ parent() }}{% endblock %}
+    {% block h1 %}<h1>Modification d'article :</h1>{% endblock %}
+    {% block langues %}
+        <div class="langues">
+            <ul class="flex2">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('edit_article', {'id' : app.request.get('id'), '_locale' : 'fr' } ) }}">FR</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('edit_article', { 'id' : app.request.get('id'), '_locale' : 'en' })}}">EN</a>
+                </li>
+            </ul>
+        </div>
+    {% endblock %}
+    {% block content %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.author) }}
+        {{ form_row(form.nb_views) }}
+        {{ form_row(form.published) }}
+        {{ form_end(form) }}
+    {% endblock %}

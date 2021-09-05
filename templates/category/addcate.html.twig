@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %} le {{ parent() }}{% endblock %}
+
+{% block h1 %}<h1>{% trans %}View the Article{% endtrans %}</h1>{% endblock %}
+{% block langues %}
+    <div class="langues">
+        <ul class="flex2">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('add_cate', {'_locale' : 'fr_FR' } ) }}">FR</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('add_cate', {'_locale' : 'en_EN' })}}">EN</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_end(form) }}
+{% endblock %}
